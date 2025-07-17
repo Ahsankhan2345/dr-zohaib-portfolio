@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* Fix Slick slider centering */
+.slick-slide > div {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
