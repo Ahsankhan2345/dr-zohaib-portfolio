@@ -8,6 +8,21 @@ export default function Appointment() {
   const doctorNumber = "923188860057";
 
   const [showToast, setShowToast] = useState(false);
+  const [selectedService, setSelectedService] = useState("");
+  const [price, setPrice] = useState("");
+  const [paymentMethod, setPaymentMethod] = useState("");
+
+  const servicePrices = {
+    "General Checkups": "Rs. 1,000",
+    Surgery: "Rs. 5,000",
+    Vaccinations: "Rs. 1,500",
+  };
+
+  const handleServiceChange = (e) => {
+    const selected = e.target.value;
+    setSelectedService(selected);
+    setPrice(servicePrices[selected] || "");
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -20,7 +35,6 @@ export default function Appointment() {
     const time = form.time.value;
     const message = form.message.value;
 
-    // Create PDF
     const doc = new jsPDF();
     doc.setFontSize(16);
     doc.text("Appointment Details", 20, 20);
@@ -30,10 +44,12 @@ export default function Appointment() {
     doc.text(`Contact No.: ${contact}`, 20, 60);
     doc.text(`Date: ${date}`, 20, 70);
     doc.text(`Time: ${time}`, 20, 80);
-    doc.text(`Message: ${message}`, 20, 90);
+    doc.text(`Service: ${selectedService}`, 20, 90);
+    doc.text(`Price: ${price}`, 20, 100);
+    doc.text(`Payment Method: ${paymentMethod}`, 20, 110);
+    doc.text(`Issue/Message: ${message}`, 20, 120);
     doc.save("appointment.pdf");
 
-    // WhatsApp message
     const whatsappMessage = `Hello Dr. Zohaib Buzdar,
 
 I would like to book an appointment for my pet. Here are the details:
@@ -43,7 +59,12 @@ I would like to book an appointment for my pet. Here are the details:
 - Contact Number: ${contact}
 - Date: ${date}
 - Time: ${time}
-- Message: ${message}
+- Service: ${selectedService}
+- Price: ${price}
+- Payment Method: ${paymentMethod}
+- Issue: ${message}
+
+📎 Please also upload the payment screenshot manually on WhatsApp to confirm your appointment.
 
 Thank you!`;
 
@@ -60,14 +81,17 @@ Thank you!`;
 
   return (
     <section className="relative min-h-screen pt-[64px] pb-20 overflow-hidden">
-      {/* Background Image */}
+      {/* Optimized Background Image */}
       <img
         src={clinicBg}
         alt="Clinic Background"
+        loading="eager"
+        decoding="async"
+        fetchpriority="high"
         className="absolute inset-0 w-full h-full object-cover brightness-50 blur-sm"
       />
 
-      {/* Overlay Gradient */}
+      {/* Overlay */}
       <div className="absolute inset-0 bg-gradient-to-r from-white/80 via-white/60 to-white/80"></div>
 
       <div className="relative z-10 max-w-3xl mx-auto px-4">
@@ -92,64 +116,71 @@ Thank you!`;
           transition={{ duration: 0.9 }}
           onSubmit={handleSubmit}
         >
+          {/* Inputs */}
           <div>
             <label className="block mb-1 font-medium">Owner Name</label>
-            <input
-              name="ownerName"
-              type="text"
-              className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
-              required
-            />
+            <input name="ownerName" type="text" className="w-full px-4 py-2 border border-gray-300 rounded" required />
           </div>
           <div>
             <label className="block mb-1 font-medium">Pet Name</label>
-            <input
-              name="petName"
-              type="text"
-              className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
-              required
-            />
+            <input name="petName" type="text" className="w-full px-4 py-2 border border-gray-300 rounded" required />
           </div>
           <div>
             <label className="block mb-1 font-medium">Contact Number</label>
-            <input
-              name="contact"
-              type="tel"
-              className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
-              required
-            />
+            <input name="contact" type="tel" className="w-full px-4 py-2 border border-gray-300 rounded" required />
           </div>
           <div>
             <label className="block mb-1 font-medium">Preferred Date</label>
-            <input
-              name="date"
-              type="date"
-              className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
-              required
-            />
+            <input name="date" type="date" className="w-full px-4 py-2 border border-gray-300 rounded" required />
           </div>
           <div>
             <label className="block mb-1 font-medium">Preferred Time</label>
-            <input
-              name="time"
-              type="time"
-              className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
-              required
-            />
+            <input name="time" type="time" className="w-full px-4 py-2 border border-gray-300 rounded" required />
           </div>
+
+          {/* Service Type */}
           <div>
-            <label className="block mb-1 font-medium">Message / Concern</label>
-            <textarea
-              name="message"
-              rows="4"
-              className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
-              required
-            ></textarea>
+            <label className="block mb-1 font-medium">Select Service</label>
+            <select value={selectedService} onChange={handleServiceChange} className="w-full px-4 py-2 border border-gray-300 rounded" required>
+              <option value="">Select Service</option>
+              <option value="General Checkups">General Checkups</option>
+              <option value="Surgery">Surgery</option>
+              <option value="Vaccinations">Vaccinations</option>
+            </select>
           </div>
-          <button
-            type="submit"
-            className="w-full bg-blue-600 text-white font-semibold py-3 rounded hover:bg-blue-700 transition duration-300"
-          >
+
+          {price && (
+            <div className="text-sm text-green-800 bg-green-100 border border-green-300 p-3 rounded">
+              💰 Estimated Price: <strong>{price}</strong>
+            </div>
+          )}
+
+          {/* Payment Method */}
+          <div>
+            <label className="block mb-1 font-medium">Payment Method</label>
+            <select value={paymentMethod} onChange={(e) => setPaymentMethod(e.target.value)} className="w-full px-4 py-2 border border-gray-300 rounded" required>
+              <option value="">Select Payment Method</option>
+              <option value="Cash">Cash</option>
+              <option value="Bank Transfer">Bank Transfer</option>
+            </select>
+          </div>
+
+          {paymentMethod === "Bank Transfer" && (
+            <div className="text-sm text-gray-700 bg-yellow-100 border border-yellow-300 p-3 rounded">
+              <p><strong>Account Title:</strong> Muhammad Zohaib</p>
+              <p><strong>Account No.:</strong> 14280010135992990018</p>
+              <p><strong>Bank:</strong> Allied Bank</p>
+              <p className="mt-1 text-red-600">📌 Please upload the payment screenshot manually on WhatsApp to approve your appointment.</p>
+            </div>
+          )}
+
+          {/* Message */}
+          <div>
+            <label className="block mb-1 font-medium">Describe Pet Issue / Message</label>
+            <textarea name="message" rows="4" className="w-full px-4 py-2 border border-gray-300 rounded" required></textarea>
+          </div>
+
+          <button type="submit" className="w-full bg-blue-600 text-white font-semibold py-3 rounded hover:bg-blue-700 transition duration-300">
             Book Appointment
           </button>
         </motion.form>

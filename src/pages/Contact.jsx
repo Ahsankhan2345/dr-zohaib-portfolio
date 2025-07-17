@@ -1,14 +1,17 @@
 import { motion } from "framer-motion";
 import { FaFacebook, FaInstagram, FaTiktok, FaLinkedin } from "react-icons/fa";
-import profile from "../assets/images/dr-zohaib.jpg"; // ✅ Corrected import
+import profile from "../assets/images/dr-zohaib.jpg"; // ✅ Optimized import
 
 export default function Contact() {
   return (
     <section className="relative w-full min-h-screen flex items-center justify-center bg-gray-100 overflow-hidden pt-[64px]">
-      {/* ✅ Background Profile Image */}
+      {/* ✅ Optimized Background Profile Image */}
       <img
         src={profile}
         alt="Dr. Zohaib Buzdar"
+        loading="eager"
+        decoding="async"
+        fetchpriority="high"
         className="absolute inset-0 w-full h-full object-cover opacity-30 blur-sm"
       />
 

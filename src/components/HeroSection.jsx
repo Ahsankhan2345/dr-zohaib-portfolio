@@ -5,11 +5,13 @@ import bgVideo from "../assets/videos/clinic-bg.mp4";
 export default function HeroSection() {
   return (
     <section className="relative w-full h-screen overflow-hidden">
-      {/* Background Video with Slow Zoom */}
+      {/* ✅ Background Video with Fast Load */}
       <motion.video
         autoPlay
         muted
         loop
+        preload="auto"                // ✅ preload video
+        playsInline
         className="absolute top-0 left-0 w-full h-full object-cover brightness-50"
         initial={{ scale: 1 }}
         animate={{ scale: 1.1 }}
@@ -19,19 +21,22 @@ export default function HeroSection() {
         Your browser does not support the video tag.
       </motion.video>
 
-      {/* Overlay Content */}
+      {/* ✅ Overlay Content */}
       <div className="relative z-10 flex flex-col md:flex-row items-center justify-center h-full px-6 md:px-20">
-        {/* Doctor Image */}
+        {/* ✅ Optimized Doctor Image */}
         <motion.img
           src={doctorImg}
           alt="Dr. Zohaib Buzdar"
           className="w-48 h-48 md:w-64 md:h-64 rounded-full border-4 border-white shadow-2xl object-cover"
+          loading="eager"                // ✅ Load immediately
+          decoding="async"               // ✅ Don't block rendering
+          fetchpriority="high"           // ✅ Hint browser it's important
           initial={{ scale: 0.5, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ type: "spring", stiffness: 200, damping: 20 }}
         />
 
-        {/* Text Content */}
+        {/* ✅ Text Content */}
         <motion.div
           className="mt-6 md:mt-0 md:ml-12 text-center md:text-left text-white max-w-xl"
           initial={{ y: 50, opacity: 0 }}
@@ -65,7 +70,7 @@ export default function HeroSection() {
             Providing top-tier veterinary care and compassionate services for your beloved pets. Book your appointment today and ensure your pet’s well-being.
           </motion.p>
 
-          {/* Advanced Button */}
+          {/* ✅ Book Button */}
           <motion.a
             href="/appointment"
             className="inline-block mt-6 px-8 py-3 bg-gradient-to-r from-blue-500 to-indigo-700 hover:from-indigo-600 hover:to-blue-800 text-white font-semibold rounded-full shadow-2xl transform transition duration-300 ease-in-out"

@@ -22,11 +22,13 @@ export default function ServicesSection() {
 
   return (
     <section className="relative w-full overflow-hidden">
-      {/* Background Video */}
+      {/* ✅ Optimized Background Video */}
       <motion.video
         autoPlay
         muted
         loop
+        playsInline
+        preload="auto" // ✅ Start loading immediately
         className="absolute top-0 left-0 w-full h-full object-cover brightness-50"
         initial={{ scale: 1 }}
         animate={{ scale: 1.1 }}
@@ -36,7 +38,7 @@ export default function ServicesSection() {
         Your browser does not support the video tag.
       </motion.video>
 
-      {/* Overlay Content */}
+      {/* ✅ Overlay Content */}
       <div className="relative z-10 py-20 px-4 md:px-10 backdrop-blur-sm">
         <motion.h2
           className="text-4xl md:text-5xl font-bold text-white text-center mb-12 drop-shadow-xl"

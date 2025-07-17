@@ -18,6 +18,9 @@ export default function AboutSection() {
             src={aboutImg}
             alt="Dr. Zohaib Buzdar - About"
             className="w-full max-w-sm rounded-2xl shadow-2xl border-4 border-blue-600 object-cover"
+            loading="eager"                // ✅ loads immediately
+            decoding="async"               // ✅ optimize rendering
+            fetchpriority="high"           // ✅ hints browser to load early
             whileHover={{ scale: 1.05, rotate: 1 }}
             transition={{ type: "spring", stiffness: 150 }}
           />
