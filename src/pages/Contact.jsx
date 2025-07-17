@@ -1,107 +1,86 @@
 import { motion } from "framer-motion";
-import { FaFacebookF, FaInstagram, FaTiktok, FaLinkedinIn } from "react-icons/fa";
-import doctorImg from "../assets/images/dr-zohaib.jpg";
+import { FaFacebook, FaInstagram, FaTiktok, FaLinkedin } from "react-icons/fa";
+import profile from "../assets/images/dr-zohaib.jpg"; // ✅ Corrected import
 
 export default function Contact() {
   return (
-    <section className="relative min-h-screen pt-[64px] pb-20 overflow-hidden">
-      {/* Background Image */}
+    <section className="relative w-full min-h-screen flex items-center justify-center bg-gray-100 overflow-hidden pt-[64px]">
+      {/* ✅ Background Profile Image */}
       <img
-        src={doctorImg}
+        src={profile}
         alt="Dr. Zohaib Buzdar"
-        className="absolute inset-0 w-full h-full object-cover brightness-50 blur-sm"
+        className="absolute inset-0 w-full h-full object-cover opacity-30 blur-sm"
       />
 
-      {/* Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-r from-white/80 via-white/60 to-white/80"></div>
-
-      <div className="relative z-10 max-w-4xl mx-auto px-4">
-        {/* Heading */}
-        <motion.div
-          className="text-center mb-12"
-          initial={{ opacity: 0, y: -40 }}
+      {/* Contact Content */}
+      <div className="relative z-10 bg-white bg-opacity-90 p-8 rounded-lg shadow-2xl max-w-xl text-center backdrop-blur-md">
+        <motion.h2
+          className="text-4xl font-bold text-blue-800 mb-4"
+          initial={{ opacity: 0, y: -30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.6 }}
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-800">
-            Contact Dr. Zohaib Buzdar
-          </h2>
-          <p className="text-gray-700 mt-3 text-lg">
-            Feel free to reach out through the details below.
-          </p>
-        </motion.div>
+          Get in Touch
+        </motion.h2>
 
-        <motion.div
-          className="bg-white/80 backdrop-blur-lg p-8 rounded-xl shadow-2xl space-y-6 text-gray-700"
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9 }}
-        >
-          <div>
-            <h3 className="text-xl font-semibold mb-1">Name</h3>
-            <p>Dr. Zohaib Buzdar</p>
-            <p className="text-sm text-gray-500">Doctor of Veterinary Medicine</p>
-          </div>
+        <p className="text-gray-700 mb-4">
+          Feel free to reach out to Dr. Zohaib Buzdar for appointments, queries, or pet care advice.
+        </p>
 
-          <div>
-            <h3 className="text-xl font-semibold mb-1">Clinic Location</h3>
-            <p> Lahore-Pakistan</p>
-          </div>
-
-          <div>
-            <h3 className="text-xl font-semibold mb-1">Phone Numbers</h3>
-            <p>0318-8860057</p>
-            <p>0337-6132219</p>
-          </div>
-
-          <div>
-            <h3 className="text-xl font-semibold mb-1">Email</h3>
+        {/* Contact Info */}
+        <div className="mb-6">
+          <p className="text-lg font-semibold text-gray-800">
+            📧 Email:{" "}
             <a
-              href="mailto:drzohaibvet@gmail.com"
+              href="mailto:zohaibuzdar74@gmail.com"
               className="text-blue-600 hover:underline"
             >
-              drzohaibvet@gmail.com
+              zohaibuzdar74@gmail.com
             </a>
-          </div>
+          </p>
+          <p className="text-lg font-semibold text-gray-800 mt-2">
+            📍 Location: Pakistan
+          </p>
+          <p className="text-lg font-semibold text-gray-800 mt-2">
+            📞 Contact: 03188860057 / 03376132219
+          </p>
+        </div>
 
-          <div>
-            <h3 className="text-xl font-semibold mb-2">Follow Dr. Zohaib Buzdar</h3>
-            <div className="flex flex-wrap gap-4 mt-3 text-blue-600 text-2xl">
-              <a
-                href="https://www.facebook.com/share/16pd8TTWae/?mibextid=qi2Omg"
-                target="_blank"
-                rel="noreferrer"
-                className="opacity-60 hover:opacity-100 hover:text-blue-700 transition-all duration-300"
-              >
-                <FaFacebookF />
-              </a>
-              <a
-                href="https://www.instagram.com/dr._zohaib_buzdar"
-                target="_blank"
-                rel="noreferrer"
-                className="opacity-60 hover:opacity-100 hover:text-pink-600 transition-all duration-300"
-              >
-                <FaInstagram />
-              </a>
-              <a
-                href="https://www.tiktok.com/@dr.zohaibbuzdaroffical"
-                target="_blank"
-                rel="noreferrer"
-                className="opacity-60 hover:opacity-100 hover:text-black transition-all duration-300"
-              >
-                <FaTiktok />
-              </a>
-              <a
-                href="https://www.linkedin.com/in/dr-zohaib-buzdar-2a5345259"
-                target="_blank"
-                rel="noreferrer"
-                className="opacity-60 hover:opacity-100 hover:text-blue-800 transition-all duration-300"
-              >
-                <FaLinkedinIn />
-              </a>
-            </div>
-          </div>
-        </motion.div>
+        {/* Social Icons */}
+        <div className="flex justify-center gap-6 text-blue-700 text-2xl">
+          <a
+            href="https://www.facebook.com/share/16pd8TTWae/?mibextid=qi2Omg"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-blue-900 transition duration-300"
+          >
+            <FaFacebook />
+          </a>
+          <a
+            href="https://www.instagram.com/dr._zohaib_buzdar"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-pink-600 transition duration-300"
+          >
+            <FaInstagram />
+          </a>
+          <a
+            href="https://www.tiktok.com/@dr.zohaibbuzdaroffical"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-black transition duration-300"
+          >
+            <FaTiktok />
+          </a>
+          <a
+            href="https://www.linkedin.com/in/dr-zohaib-buzdar-2a5345259"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-blue-600 transition duration-300"
+          >
+            <FaLinkedin />
+          </a>
+        </div>
       </div>
     </section>
   );
