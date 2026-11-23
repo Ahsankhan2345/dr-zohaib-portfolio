@@ -1,4 +1,6 @@
+
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 
@@ -15,7 +17,7 @@ export default function App() {
     <BrowserRouter>
       <Header />
 
-      <main className="pt-20">
+      <main className="w-full m-0 p-0">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
