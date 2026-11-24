@@ -33,6 +33,49 @@ export default function Gallery() {
       desc: "Wagging tails, happy purrs, and smiling pet parents.",
       tag: "Happy Tails",
     },
+    // ✅ Public folder se 7 new images add ki gayi hain
+    {
+      src: "/zohaib 1.jpeg",
+      title: "Dedicated Pet Checkup",
+      desc: "Thorough and gentle health examination for your beloved pets.",
+      tag: "Health Care",
+    },
+    {
+      src: "/zohaib 2.jpeg",
+      title: "Expert Veterinary Team",
+      desc: "Experienced specialists ensuring the best treatment and comfort.",
+      tag: "Our Team",
+    },
+    {
+      src: "/zohaib 3.jpeg",
+      title: "Friendly Clinic Environment",
+      desc: "A welcoming and stress-free atmosphere for every animal.",
+      tag: "Comfort Zone",
+    },
+    {
+      src: "/zohaib 4.jpeg",
+      title: "Personalized Treatment",
+      desc: "Tailored wellness and medical care plans for every pet.",
+      tag: "Wellness",
+    },
+    {
+      src: "/zohaib 5.jpeg",
+      title: "Recovery & Comfort",
+      desc: "Cozy spaces designed for peaceful post-treatment recovery.",
+      tag: "Recovery",
+    },
+    {
+      src: "/zohaib 6.jpeg",
+      title: "Preventive Care",
+      desc: "Regular vaccinations and checkups to keep pets active and healthy.",
+      tag: "Prevention",
+    },
+    {
+      src: "/zohaib 7.jpeg",
+      title: "Trusted Pet Companionship",
+      desc: "Building lifelong trust with pets and their caring families.",
+      tag: "Happy Moments",
+    },
   ];
 
   const containerVariants = {
@@ -108,7 +151,7 @@ export default function Gallery() {
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.15 }}
+          viewport={{ once: true, amount: 0.1 }}
         >
           {images.map((img, idx) => (
             <motion.div
@@ -140,7 +183,7 @@ export default function Gallery() {
                 <motion.img
                   src={img.src}
                   alt={img.title}
-                  loading="eager"
+                  loading={idx < 4 ? "eager" : "lazy"}
                   fetchpriority={idx === 0 ? "high" : "auto"}
                   className="w-full h-auto object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105"
                 />
